@@ -7,13 +7,44 @@ namespace ST_Project;
 [TestClass]
 public class UnitTest1
 {
+    #region Setups and Cleanups
 
+    public TestContext instance;
+    public TestContext TestContext
+    {
+        set { instance = value; }
+        get { return instance; }
+    }
+    [ClassInitialize()]
+    public static void ClassInit(TestContext context)
+    {
+
+    }
+
+    [ClassCleanup()]
+    public static void ClassCleanup()
+    {
+
+    }
+
+    [TestInitialize()]
+    public void TestInit()
+    {
+        CorePage.SeleniumInit("Chrome");
+    }
+
+
+    [TestCleanup()]
+    public void TestCleanup()
+    {
+        CorePage.driver.Close();
+    }
+    #endregion
     LoginPage loginPage = new LoginPage();
     MensPage mensPage = new MensPage();
     // [TestMethod]
     // public void LoginWithValidEmailValidPassword()
     // {
-    //     CorePage.SeleniumInit();
     //     loginPage.Login("https://magento.softwaretestingboard.com/", "authorization-link",
     //     "emmenual123@gmail.com", "qDtP6zAYSktxT1");
 
@@ -21,13 +52,11 @@ public class UnitTest1
     //     string actualText = CorePage.driver.FindElement(By.ClassName("logged-in")).Text;
 
     //     Assert.AreEqual(expectedText, actualText);
-    //     CorePage.driver.Close();
 
     // }
     // [TestMethod]
     // public void LoginWithInvalidEmailInvalidPassword()
     // {
-    //     CorePage.SeleniumInit();
     //     loginPage.Login("https://magento.softwaretestingboard.com/", "authorization-link",
     //     "emmenual1234@gmail.com", "qDtP6zAYSktxT12");
 
@@ -35,13 +64,11 @@ public class UnitTest1
     //     string actualText = CorePage.driver.FindElement(By.ClassName("messages")).Text;
 
     //     Assert.AreEqual(expectedText, actualText);
-    //     CorePage.driver.Close();
     // }
 
     [TestMethod]
     public void LoginAndAddTankFromMensPage()
     {
-        CorePage.SeleniumInit();
         loginPage.Login("https://magento.softwaretestingboard.com/", "authorization-link",
         "emmenual123@gmail.com", "qDtP6zAYSktxT1");
 
@@ -49,11 +76,10 @@ public class UnitTest1
         mensPage.AddArgusAllWeatherTankToCard("2");
 
         string expectedText = "You added Argus All-Weather Tank to your shopping cart.";
-        Thread.Sleep(10000);
+        Thread.Sleep(20000);
         string actualText = CorePage.driver.FindElement(By.ClassName("messages")).Text;
 
         Assert.AreEqual(expectedText, actualText);
-        CorePage.driver.Close();
     }
 
 
