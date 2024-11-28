@@ -114,3 +114,4 @@
 /home/emmanuel/SoftwareTestingProject/ST_Project/bin/Debug/net8.0/selenium-manager/windows/selenium-manager.exe
 /home/emmanuel/SoftwareTestingProject/ST_Project/bin/Debug/net8.0/WebDriver.Support.dll
 /home/emmanuel/SoftwareTestingProject/ST_Project/bin/Debug/net8.0/WebDriver.dll
+/home/emmanuel/SoftwareTestingProject/ST_Project/bin/Debug/net8.0/SeleniumExtras.WaitHelpers.dll

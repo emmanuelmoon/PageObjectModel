@@ -1,6 +1,7 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
+using ST_Project.WebApp.CheckoutPage;
 using ST_Project.WebApp.MensPage;
 
 namespace ST_Project;
@@ -43,6 +44,7 @@ public class UnitTest1
     #endregion
     LoginPage loginPage = new LoginPage();
     MensPage mensPage = new MensPage();
+    CheckoutPage checkoutPage = new CheckoutPage();
     public static IEnumerable<object[]> AddTestData =>
     new List<object[]>
     {
@@ -54,29 +56,39 @@ public class UnitTest1
         }
     };
 
-
-    // public void Add_ShouldReturnCorrectSum_DynamicData(int a, int b, int expected)
+    // [TestCategory("Login")]
+    // [DataTestMethod]
+    // [DynamicData(nameof(AddTestData))]
+    // public void Login(string url, string signInLink, string email, string password, string locator, string expectedText)
     // {
-    //     var calculator = new Calculator();
-    //     var result = calculator.Add(a, b);
-    //     Assert.AreEqual(expected, result);
+    //     loginPage.Login(url, signInLink, email, password);
+
+    //     WebDriverWait wait = new WebDriverWait(CorePage.driver, new TimeSpan(0, 1, 0));
+    //     wait.Until(d => d.FindElement(By.ClassName(locator)));
+    //     string actualText = CorePage.driver.FindElement(By.ClassName(locator)).Text;
+
+    //     Assert.AreEqual(expectedText, actualText);
     // }
+    // [TestMethod]
+    // public void LoginAndAddTankFromMensPage()
+    // {
+    //     loginPage.Login("https://magento.softwaretestingboard.com/", "authorization-link",
+    //     "emmenual123@gmail.com", "qDtP6zAYSktxT1");
 
-    [DataTestMethod]
-    [DynamicData(nameof(AddTestData))]
-    public void LoginWithValidEmailValidPassword(string url, string signInLink, string email, string password, string locator, string expectedText)
-    {
-        loginPage.Login(url, signInLink, email, password);
+    //     mensPage.GoToMensSection();
+    //     mensPage.AddArgusAllWeatherTankToCard("2");
 
-        WebDriverWait wait = new WebDriverWait(CorePage.driver, new TimeSpan(0, 1, 0));
-        wait.Until(d => d.FindElement(By.ClassName(locator)));
-        string actualText = CorePage.driver.FindElement(By.ClassName(locator)).Text;
+    //     string expectedText = "You added Argus All-Weather Tank to your shopping cart.";
 
-        Assert.AreEqual(expectedText, actualText);
+    // // WebDriverWait wait = new WebDriverWait(CorePage.driver, new TimeSpan(0, 1, 0));
+    // // wait.Until(d => d.FindElement(By.ClassName("messages")));
+    // Thread.Sleep(20000);
+    //     string actualText = CorePage.driver.FindElement(By.ClassName("messages")).Text;
 
-    }
+    // Assert.AreEqual(expectedText, actualText);
+    // }
     [TestMethod]
-    public void LoginAndAddTankFromMensPage()
+    public void LoginAndCheckout()
     {
         loginPage.Login("https://magento.softwaretestingboard.com/", "authorization-link",
         "emmenual123@gmail.com", "qDtP6zAYSktxT1");
@@ -84,14 +96,17 @@ public class UnitTest1
         mensPage.GoToMensSection();
         mensPage.AddArgusAllWeatherTankToCard("2");
 
-        string expectedText = "You added Argus All-Weather Tank to your shopping cart.";
+        // WebDriverWait wait = new WebDriverWait(CorePage.driver, new TimeSpan(0, 1, 0));
+        // wait.Until(d => d.FindElement(By.ClassName("messages")));
+        Thread.Sleep(15000);
 
+        checkoutPage.PerformCheckout();
 
-        WebDriverWait wait = new WebDriverWait(CorePage.driver, new TimeSpan(0, 1, 0));
-        wait.Until(d => d.FindElement(By.ClassName("messages")));
-        string actualText = CorePage.driver.FindElement(By.ClassName("messages")).Text;
+        string expectedText = "Thank you for your purchase!";
+        string actualText = CorePage.driver.FindElement(By.ClassName("base")).Text;
 
         Assert.AreEqual(expectedText, actualText);
+
     }
 
 

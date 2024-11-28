@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "4Zprt6iOgoUUD9hh+vRxRtW5VXy223sXHVcWZ6I6tTcAZBj0VYEkLAq+ukoMDGzY6h02DbaVB7UUawMYtXfD8Q==",
+  "dgSpecHash": "igfaO724JpY3HHZh8DOrNl5aMNBnOV/xI2Qz2ctf7tZTtc3GZzoBZ5ET0BODo9Z1bROaCo1YZQbsmFW8q0sBCg==",
   "success": true,
   "projectFilePath": "/home/emmanuel/SoftwareTestingProject/ST_Project/ST_Project.csproj",
   "expectedPackageFiles": [
     "/home/emmanuel/.nuget/packages/coverlet.collector/6.0.0/coverlet.collector.6.0.0.nupkg.sha512",
+    "/home/emmanuel/.nuget/packages/dotnetseleniumextras.waithelpers/3.11.0/dotnetseleniumextras.waithelpers.3.11.0.nupkg.sha512",
     "/home/emmanuel/.nuget/packages/microsoft.codecoverage/17.6.0/microsoft.codecoverage.17.6.0.nupkg.sha512",
     "/home/emmanuel/.nuget/packages/microsoft.net.test.sdk/17.6.0/microsoft.net.test.sdk.17.6.0.nupkg.sha512",
     "/home/emmanuel/.nuget/packages/microsoft.testplatform.objectmodel/17.6.0/microsoft.testplatform.objectmodel.17.6.0.nupkg.sha512",

@@ -13,7 +13,13 @@ public class CorePage
   {
     if (browser == "Chrome")
     {
-      IWebDriver chromeDriver = new ChromeDriver();
+      var options = new ChromeOptions();
+      // options.AddArgument("--headless");
+      options.AddArgument("--disable-gpu");
+      options.AddArgument("--no-sandbox");
+      options.AddArgument("--disable-extensions");
+      options.AddArgument("--incognito");
+      IWebDriver chromeDriver = new ChromeDriver(options);
       driver = chromeDriver;
     }
     else if (browser == "Firefox")
@@ -22,5 +28,22 @@ public class CorePage
       driver = firefoxDriver;
     }
     return driver;
+  }
+
+  public void OpenUrl(string url)
+  {
+    driver.Url = url;
+  }
+  public void Write(By by, string setValue)
+  {
+    driver.FindElement(by).SendKeys(setValue);
+  }
+  public void Click(By by)
+  {
+    driver.FindElement(by).Click();
+  }
+  public void Clear(By by)
+  {
+    driver.FindElement(by).Clear();
   }
 }
