@@ -1,4 +1,5 @@
-using System;
+using AventStack.ExtentReports;
+using AventStack.ExtentReports.Reporter;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
@@ -46,4 +47,5 @@ public class CorePage
   {
     driver.FindElement(by).Clear();
   }
+
 }

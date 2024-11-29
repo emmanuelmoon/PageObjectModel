@@ -1,5 +1,4 @@
 using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 using ST_Project.WebApp.CheckoutPage;
 using ST_Project.WebApp.MensPage;
@@ -7,7 +6,7 @@ using ST_Project.WebApp.MensPage;
 namespace ST_Project;
 
 [TestClass]
-public class UnitTest1
+public class TestExecution : CorePage
 {
     #region Setups and Cleanups
 
@@ -16,6 +15,15 @@ public class UnitTest1
     {
         set { instance = value; }
         get { return instance; }
+    }
+    [AssemblyInitialize()]
+    public static void AssemblyInit(TestContext context)
+    {
+    }
+
+    [AssemblyCleanup()]
+    public static void AssemblyCleanup()
+    {
     }
     [ClassInitialize()]
     public static void ClassInit(TestContext context)
@@ -32,14 +40,14 @@ public class UnitTest1
     [TestInitialize()]
     public void TestInit()
     {
-        CorePage.SeleniumInit("Chrome");
+        SeleniumInit("Chrome");
     }
 
 
     [TestCleanup()]
     public void TestCleanup()
     {
-        CorePage.driver.Close();
+        driver.Close();
     }
     #endregion
     LoginPage loginPage = new LoginPage();
@@ -56,37 +64,37 @@ public class UnitTest1
         }
     };
 
-    // [TestCategory("Login")]
-    // [DataTestMethod]
-    // [DynamicData(nameof(AddTestData))]
-    // public void Login(string url, string signInLink, string email, string password, string locator, string expectedText)
-    // {
-    //     loginPage.Login(url, signInLink, email, password);
+    [TestCategory("Login")]
+    [DataTestMethod]
+    [DynamicData(nameof(AddTestData))]
+    public void Login(string url, string signInLink, string email, string password, string locator, string expectedText)
+    {
+        loginPage.Login(url, signInLink, email, password);
 
-    //     WebDriverWait wait = new WebDriverWait(CorePage.driver, new TimeSpan(0, 1, 0));
-    //     wait.Until(d => d.FindElement(By.ClassName(locator)));
-    //     string actualText = CorePage.driver.FindElement(By.ClassName(locator)).Text;
+        WebDriverWait wait = new WebDriverWait(CorePage.driver, new TimeSpan(0, 1, 0));
+        wait.Until(d => d.FindElement(By.ClassName(locator)));
+        string actualText = CorePage.driver.FindElement(By.ClassName(locator)).Text;
 
-    //     Assert.AreEqual(expectedText, actualText);
-    // }
-    // [TestMethod]
-    // public void LoginAndAddTankFromMensPage()
-    // {
-    //     loginPage.Login("https://magento.softwaretestingboard.com/", "authorization-link",
-    //     "emmenual123@gmail.com", "qDtP6zAYSktxT1");
+        Assert.AreEqual(expectedText, actualText);
+    }
+    [TestMethod]
+    public void LoginAndAddTankFromMensPage()
+    {
+        loginPage.Login("https://magento.softwaretestingboard.com/", "authorization-link",
+        "emmenual123@gmail.com", "qDtP6zAYSktxT1");
 
-    //     mensPage.GoToMensSection();
-    //     mensPage.AddArgusAllWeatherTankToCard("2");
+        mensPage.GoToMensSection();
+        mensPage.AddArgusAllWeatherTankToCard("2");
 
-    //     string expectedText = "You added Argus All-Weather Tank to your shopping cart.";
+        string expectedText = "You added Argus All-Weather Tank to your shopping cart.";
 
-    // // WebDriverWait wait = new WebDriverWait(CorePage.driver, new TimeSpan(0, 1, 0));
-    // // wait.Until(d => d.FindElement(By.ClassName("messages")));
-    // Thread.Sleep(20000);
-    //     string actualText = CorePage.driver.FindElement(By.ClassName("messages")).Text;
+        // WebDriverWait wait = new WebDriverWait(CorePage.driver, new TimeSpan(0, 1, 0));
+        // wait.Until(d => d.FindElement(By.ClassName("messages")));
+        Thread.Sleep(20000);
+        string actualText = CorePage.driver.FindElement(By.ClassName("messages")).Text;
 
-    // Assert.AreEqual(expectedText, actualText);
-    // }
+        Assert.AreEqual(expectedText, actualText);
+    }
     [TestMethod]
     public void LoginAndCheckout()
     {
